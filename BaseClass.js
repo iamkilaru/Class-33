@@ -11,7 +11,7 @@ class BaseClass{
         this.image = loadImage("sprites/base.png");
         World.add(world, this.body);
       }
-      display(){
+        display(){
         var angle = this.body.angle;
         push();
         translate(this.body.position.x, this.body.position.y);

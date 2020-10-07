@@ -1,3 +1,6 @@
+//var list = ["apples", "tomatos", "bouncy houses", "houses", "The Earth", "An excapt copy of the Earth", "A list of the earths that I can buy"];
+//console.log(list);
+
 const Engine = Matter.Engine;
 const World= Matter.World;
 const Bodies = Matter.Bodies;
@@ -55,6 +58,12 @@ function draw(){
         fill("white")
         text("Score  " + score, width-300, 50)
     
+        /*
+    for(var i=0;i<list.length;i++){ //incrementation
+        text(list[i],200,10+(25*i));
+    }
+    */
+
     Engine.update(engine);
     //strokeWeight(4);
     box1.display();
@@ -89,23 +98,25 @@ function mouseDragged(){
 
 function mouseReleased(){
     slingshot.fly();
-    gameState = "launched";
+    //gameState = "launched";
 }
 
 function keyPressed(){
     if(keyCode === 32){
-       // slingshot.attach(bird.body);
+        bird.trajectory=[];
+        Matter.Body.setPosition(bird.body, {x:200,y:50});
+       slingshot.attach(bird.body);
     }
 }
 
 async function getBackgroundImg(){
-    var response = await fetch("http://worldtimeapi.org/api/timezone/Asia/Kolkata");
+    var response = await fetch("http://worldtimeapi.org/api/timezone/America/New_York");
     var responseJSON = await response.json();
 
     var datetime = responseJSON.datetime;
     var hour = datetime.slice(11,13);
     
-    if(hour>=06 && hour<=19){
+    if(hour>=06 && hour<=21){
         bg = "sprites/bg1.png";
     }
     else{
